@@ -45,8 +45,6 @@ def start():
     options['socket'] = get_socket()
     options['umask'] = '002'
     fastcgi.runfastcgi(**options)
-    time.sleep(1)
-    os.chmod(options['socket'], 0777)
 
 def stop():
     pid = is_running()
