@@ -58,4 +58,9 @@ def stop():
                 time.sleep(0.1)
         except OSError:
             pass
+        for filename in (get_pidfile(), get_socket()):
+            try:
+                os.unlink(filename)
+            except OSError:
+                pass
 
