@@ -1,0 +1,36 @@
+Django application “runfcgi”
+
+1. Introduction
+
+This django app is a little helper tool for deploying django projects as fastcgi. It makes possible to set up all manage.py runfcgi parameters in settings.py file and control fastcgi daemon with simple commands: start, stop, restart.
+
+2. Installation
+
+git clone git://github.com/andreiko/runfcgi.git runfcgi_dist
+cd runfcgi_dist
+python setup.py install
+
+3. Usage
+
+3.1. Setting up your settings.py
+
+Add DJANGO_ROOT variable:
+import os
+DJANGO_ROOT = os.path.dirname(os.path.abspath(__file__)) + '/'
+
+Add “runfcgi” to INSTALLED_APPS list in your settings.py
+
+(Optional) Add FASTCGI_OPTIONS. This is a dictionary of parameters that you used to specify on command line for manage.py runfcgi. Default parameters are:
+pidfile = DJANGO_ROOT/var/run/fastcgi.pid
+workdir = DJANGO_ROOT
+socket = DJANGO_ROOT/var/run/fastcgi.socket
+umask = ‘002’
+
+If you keep above default option values, create specified directories for socket and pidfile.
+
+3.2. Using management commands
+
+./manage.py start – starts fastcgi daemon with specified options, it checks pidfile for another running instance and does nothing if its process is running. It can be installed as crontab operation to check fastcgi daemon every minute.
+./manage.py stop – kills fastcgi daemon
+./manage.py restart – stop + start
+
