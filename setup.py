@@ -9,5 +9,5 @@ setup(
         author='Andrey Bulgakov',
         author_email='mail@andreiko.ru',
         url='http://github.com/andreiko/runfcgi',
-        packages=['runfcgi'],
+        packages=['runfcgi', 'runfcgi.management', 'runfcgi.management.commands'],
     )
