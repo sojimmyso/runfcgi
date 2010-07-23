@@ -45,7 +45,13 @@ def start():
     options = get_options()
     options['pidfile'] = get_pidfile()
     options['workdir'] = get_workdir()
-    options['socket'] = get_socket()
+    if 'host' not in options or 'port' not in options:
+        options['socket'] = get_socket()
+        options.pop('host', None)
+        options.pop('port', None)
+    else:
+        options.pop('socket', None)
+
     options['umask'] = get_umask()
     fastcgi.runfastcgi(**options)
 
