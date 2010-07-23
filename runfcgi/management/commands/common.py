@@ -21,6 +21,9 @@ def get_workdir():
 def get_socket():
     return get_options().get('socket', settings.DJANGO_ROOT + 'var/run/fastcgi.socket')
 
+def get_umask():
+    return get_options().get('umask', '002')
+
 def is_running():
     pidfile = get_pidfile()
     if os.path.exists(pidfile):
@@ -43,7 +46,7 @@ def start():
     options['pidfile'] = get_pidfile()
     options['workdir'] = get_workdir()
     options['socket'] = get_socket()
-    options['umask'] = '002'
+    options['umask'] = get_umask()
     fastcgi.runfastcgi(**options)
 
 def stop():
