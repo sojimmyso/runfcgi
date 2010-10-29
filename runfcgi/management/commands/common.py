@@ -22,7 +22,7 @@ def get_socket():
     return get_options().get('socket', settings.DJANGO_ROOT + 'var/run/fastcgi.socket')
 
 def get_umask():
-    return get_options().get('umask', '002')
+    return get_options().get('umask', '000')
 
 def is_running():
     pidfile = get_pidfile()
